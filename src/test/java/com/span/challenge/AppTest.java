@@ -2,12 +2,9 @@ package com.span.challenge;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -92,11 +89,6 @@ public class AppTest {
 
         assertEquals(away[0], "Team B");
         assertEquals(away[1], "0");
-    }
-
-    @Test
-    public void testReadResults_File() {
-        // Integration test?
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.span.challenge;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -76,8 +76,8 @@ public class App {
                 flushTerminal();
                 System.out.println("Please Enter Filename:");
                 System.out.print("\nInput (.txt): ");
-                File file = new File(input.next());
-                Scanner results = new Scanner(file);
+                InputStream is = App.class.getResourceAsStream("/" +  input.next());
+                Scanner results = new Scanner(is);
                 return results;
             default:
                 return null;

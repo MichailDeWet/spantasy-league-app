@@ -20,11 +20,11 @@ public class Team {
     }
 
     public int getPoints() {
-        return points;
+        return Integer.valueOf(points);
     }
 
     public String getName() {
-        return name;
+        return String.valueOf(name);
     }
 
     public void setPosition(int position) {
