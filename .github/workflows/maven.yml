@@ -23,5 +23,5 @@ jobs:
         distribution: 'adopt'
         cache: maven
         
-    - name: Build with Maven
+    - name: (3/3) Build with Maven
       run: mvn -B package --file pom.xml
