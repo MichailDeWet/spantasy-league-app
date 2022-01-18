@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class App {
+final class App {
     /**
      * Says who finishes where in the league.
      * Scanner will seek user input for a specified output.
@@ -102,7 +102,7 @@ public class App {
      * @param table (List<Team>)
      * @return (List<Team>) table
      */
-    protected static List<Team> positionTable(List<Team> table) {
+    static List<Team> positionTable(List<Team> table) {
         int position = 1;
         int step = 0;
         Team temp = table.get(0);
@@ -131,7 +131,7 @@ public class App {
      * @param teams (List<Team>)
      * @return (List<Team>) table
      */
-    protected static List<Team> sortTable(HashMap<String, Team> teams, List<Team> table) {
+    static List<Team> sortTable(HashMap<String, Team> teams, List<Team> table) {
         table.addAll(teams.values());
         table.sort(new TeamComparator());
         return table;
@@ -145,17 +145,23 @@ public class App {
      * @param input (Scanner)
      * @return HashMap<String, Team> teams
      */
-    protected static HashMap<String, Team> readResults(Scanner input, HashMap<String, Team> teams) {
+    static HashMap<String, Team> readResults(Scanner input, HashMap<String, Team> teams) {
         while (true) {
             /** Break condition (File fully read). */
-            if (!input.hasNextLine()) break;
+            if (!input.hasNextLine()) {
+                break;
+            }
 
             String s = input.nextLine().trim();
 
-            if (s.equals("")) s = input.nextLine();
+            if (s.equals("")) {
+                s = input.nextLine();
+            }
 
             /** Break condition (User finished enterng results). */
-            if ("end".equalsIgnoreCase(s)) break;
+            if ("end".equalsIgnoreCase(s)) {
+                break;
+            }
             /** Terminate condition (User wants to close application). */
             else if("exit".equalsIgnoreCase(s)) {
                 flushTerminal();
@@ -166,8 +172,13 @@ public class App {
             String[] away = teamAndResult(false, s);
 
             /** Add new teams to the league */
-            if (!teams.containsKey(home[0])) teams.put(home[0], new Team(home[0]));
-            if (!teams.containsKey(away[0])) teams.put(away[0], new Team(away[0]));
+            if (!teams.containsKey(home[0])) {
+                teams.put(home[0], new Team(home[0]));
+            }
+
+            if (!teams.containsKey(away[0])) {
+                teams.put(away[0], new Team(away[0]));
+            }
 
             /** Add new teams to the league */
             teams = addPoints(home, away, teams);
@@ -186,12 +197,15 @@ public class App {
      * @param teams HashMap<String, Team> teams.
      * @return HashMap<String, Team> teams.
      */
-    protected static HashMap<String, Team> addPoints(String[] home, String[] away, HashMap<String, Team> teams) {
-        if (home[1].compareTo(away[1]) > 0) teams.get(home[0]).win();
-        else if (home[1].compareTo(away[1]) == 0) {
+    static HashMap<String, Team> addPoints(String[] home, String[] away, HashMap<String, Team> teams) {
+        if (Integer.parseInt(home[1]) > Integer.parseInt(away[1])) {
+            teams.get(home[0]).win();
+        } else if (Integer.parseInt(home[1]) == Integer.parseInt(away[1])) {
             teams.get(home[0]).draw();
             teams.get(away[0]).draw();
-        } else teams.get(away[0]).win();
+        } else {
+            teams.get(away[0]).win();
+        }
 
         return teams;
     }
@@ -203,12 +217,15 @@ public class App {
      * @param s (String) 
      * @return
      */
-    protected static String[] teamAndResult(Boolean isHome, String result) {
+    static String[] teamAndResult(Boolean isHome, String result) {
         String[] fixture = result.split(", ");;
         String[] array = new String[2];
 
-        if (isHome) Arrays.parallelSetAll(array, (i) -> fixture[0].split("(?<=\\D)(?=\\d)")[i].trim());
-        else Arrays.parallelSetAll(array, (i) -> fixture[1].split("(?<=\\D)(?=\\d)")[i].trim());
+        if (isHome) {
+            Arrays.parallelSetAll(array, (i) -> fixture[0].split("(?<=\\D)(?=\\d)")[i].trim());
+        } else {
+            Arrays.parallelSetAll(array, (i) -> fixture[1].split("(?<=\\D)(?=\\d)")[i].trim());
+        }
 
         return array;
     }
