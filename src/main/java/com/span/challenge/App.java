@@ -198,9 +198,9 @@ final class App {
      * @return HashMap<String, Team> teams.
      */
     static HashMap<String, Team> addPoints(String[] home, String[] away, HashMap<String, Team> teams) {
-        if (home[1].compareTo(away[1]) > 0) {
+        if (Integer.parseInt(home[1]) > Integer.parseInt(away[1])) {
             teams.get(home[0]).win();
-        } else if (home[1].compareTo(away[1]) == 0) {
+        } else if (Integer.parseInt(home[1]) == Integer.parseInt(away[1])) {
             teams.get(home[0]).draw();
             teams.get(away[0]).draw();
         } else {
